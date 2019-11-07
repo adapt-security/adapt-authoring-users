@@ -1,0 +1,19 @@
+{
+  "name": "adapt-authoring-users",
+  "version": "0.0.1",
+  "description": "User management module for the Adapt authoring tool",
+  "main": "index.js",
+  "adapt_authoring": {
+    "module": true,
+    "moduleDependencies": [
+      "adapt-authoring-mongodb"
+    ],
+    "documentation": {
+      "enable": true
+    }
+  },
+  "peerDependencies": {
+    "adapt-authoring-api": "git+https://github.com/adapt-security/adapt-authoring-api.git",
+    "adapt-authoring-core": "git+https://github.com/adapt-security/adapt-authoring-core.git"
+  }
+}
