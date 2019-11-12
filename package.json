@@ -15,5 +15,8 @@
   "peerDependencies": {
     "adapt-authoring-api": "git+https://github.com/adapt-security/adapt-authoring-api.git",
     "adapt-authoring-core": "git+https://github.com/adapt-security/adapt-authoring-core.git"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3"
   }
 }
