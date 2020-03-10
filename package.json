@@ -1,0 +1,11 @@
+{
+  "name": "adapt-authoring-users",
+  "version": "0.0.1",
+  "description": "Module for managing users",
+  "homepage": "https://github.com/adapt-security/adapt-authoring-users",
+  "main": "index.js",
+  "peerDependencies": {
+    "adapt-authoring-api": "github:adapt-security/adapt-authoring-api.git",
+    "adapt-authoring-core": "github:adapt-security/adapt-authoring-core.git",
+  }
+}
