@@ -6,6 +6,6 @@
   "main": "index.js",
   "peerDependencies": {
     "adapt-authoring-api": "github:adapt-security/adapt-authoring-api.git",
-    "adapt-authoring-core": "github:adapt-security/adapt-authoring-core.git",
+    "adapt-authoring-core": "github:adapt-security/adapt-authoring-core.git"
   }
 }
