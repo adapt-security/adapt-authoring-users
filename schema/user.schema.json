@@ -6,20 +6,20 @@
     "email": {
       "description": "Email address for the user",
       "type": "string"
-    }
+    },
     "firstName": {
       "description": "First name of the user",
       "type": "string",
       "default": "Adapt"
-    }
+    },
     "lastName": {
       "description": "Last name of the user",
-      "type": "string"
+      "type": "string",
       "default": "User"
-    }
+    },
     "responsibilities": {
       "description": "Responsibilities assigned to this user",
-      "type": "array"
+      "type": "array",
       "items": {
         "type": "String",
         "isObjectId": true
