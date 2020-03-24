@@ -17,8 +17,8 @@
       "type": "string",
       "default": "User"
     },
-    "responsibilities": {
-      "description": "Responsibilities assigned to this user",
+    "roles": {
+      "description": "Roles assigned to this user",
       "type": "array",
       "items": {
         "type": "string",
