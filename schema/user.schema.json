@@ -16,15 +16,6 @@
       "description": "Last name of the user",
       "type": "string",
       "default": "User"
-    },
-    "roles": {
-      "description": "Roles assigned to this user",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "isObjectId": true
-      },
-      "default": []
     }
   },
   "required": ["email"]
