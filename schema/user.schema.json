@@ -19,5 +19,6 @@
       "default": "User"
     }
   },
-  "required": ["email"]
+  "required": ["email"],
+  "additionalProperties": false
 }
