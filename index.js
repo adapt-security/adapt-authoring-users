@@ -1,2 +1,1 @@
-const usersModule = require('./lib/usersModule');
-module.exports = usersModule;
+module.exports = require('./lib/UsersModule');
