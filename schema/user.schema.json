@@ -19,6 +19,11 @@
       "description": "Last name of the user",
       "type": "string",
       "default": "User"
+    },
+    "isEnabled": {
+      "description": "Whether the user is able to access the system",
+      "type": "boolean",
+      "default": true
     }
   },
   "required": ["email"]
