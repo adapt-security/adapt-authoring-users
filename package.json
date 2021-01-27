@@ -4,10 +4,10 @@
   "description": "Module for managing users",
   "homepage": "https://github.com/adaptlearning/adapt-authoring-users",
   "license": "GPL-3.0",
-  "repository": "github:adaptlearning/adapt-authoring-users",
+  "repository": "adaptlearning/adapt-authoring-users",
   "main": "index.js",
   "peerDependencies": {
-    "adapt-authoring-api": "github:adapt-security/adapt-authoring-api.git",
-    "adapt-authoring-core": "github:adapt-security/adapt-authoring-core.git"
+    "adapt-authoring-api": "adapt-security/adapt-authoring-api",
+    "adapt-authoring-core": "adapt-security/adapt-authoring-core"
   }
 }
