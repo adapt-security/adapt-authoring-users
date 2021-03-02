@@ -24,6 +24,12 @@
       "description": "Whether the user is able to access the system",
       "type": "boolean",
       "default": true
+    },
+    "lastAccess": {
+      "type": "string",
+      "format": "date-time",
+      "isDate": true,
+      "description": "Timestamp of the last access"
     }
   },
   "required": ["email"]
