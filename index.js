@@ -1,1 +1,1 @@
-module.exports = require('./lib/UsersModule');
+export { default } from './lib/UsersModule.js';
