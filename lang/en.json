@@ -1,0 +1,4 @@
+{
+    "error.faileduserquery": "Failed to query users",
+    "error.missingfields": "Required values are missing from request"
+}
