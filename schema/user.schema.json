@@ -26,10 +26,10 @@
       "default": true
     },
     "lastAccess": {
+      "description": "Timestamp of the last access",
       "type": "string",
       "format": "date-time",
-      "isDate": true,
-      "description": "Timestamp of the last access"
+      "isDate": true
     }
   },
   "required": ["email"]
