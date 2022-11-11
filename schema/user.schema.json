@@ -29,6 +29,7 @@
       "description": "Timestamp of the last access",
       "type": "string",
       "format": "date-time",
+      "isReadOnly": true,
       "isDate": true
     }
   },
