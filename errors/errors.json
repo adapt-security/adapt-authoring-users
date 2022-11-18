@@ -1,0 +1,9 @@
+{
+  "DUPL_USER": {
+    "data": {
+      "email": "Email address of the user"
+    },
+    "description": "A user already exists with the email %{email}",
+    "statusCode": 400
+  }
+}
