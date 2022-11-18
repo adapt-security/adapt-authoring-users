@@ -3,7 +3,7 @@
     "data": {
       "email": "Email address of the user"
     },
-    "description": "A user already exists with the email %{email}",
+    "description": "A user already exists with the passed email address",
     "statusCode": 400
   }
 }
