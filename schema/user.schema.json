@@ -23,6 +23,7 @@
     "isEnabled": {
       "description": "Whether the user is able to access the system",
       "type": "boolean",
+      "isReadOnly": true,
       "default": true
     },
     "lastAccess": {
