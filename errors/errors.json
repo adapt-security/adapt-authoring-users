@@ -5,5 +5,12 @@
     },
     "description": "A user already exists with the passed email address",
     "statusCode": 400
+  },
+  "USER_SELF_DELETE_ILLEGAL": {
+    "data": {
+      "id": "_id of the user"
+    },
+    "description": "You cannot delete your own user account",
+    "statusCode": 400
   }
 }
