@@ -6,8 +6,7 @@
   "properties": {
     "email": {
       "description": "Email address for the user",
-      "type": "string",
-      "format": "email"
+      "type": "string"
     },
     "firstName": {
       "description": "First name of the user",
