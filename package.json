@@ -1,6 +1,6 @@
 {
   "name": "adapt-authoring-users",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Module for managing system users",
   "homepage": "https://github.com/adapt-security/adapt-authoring-users",
   "license": "GPL-3.0",
