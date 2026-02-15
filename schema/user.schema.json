@@ -6,17 +6,20 @@
   "properties": {
     "email": {
       "description": "Email address for the user",
-      "type": "string"
+      "type": "string",
+      "isSearchable": true
     },
     "firstName": {
       "description": "First name of the user",
       "type": "string",
-      "default": "Adapt"
+      "default": "Adapt",
+      "isSearchable": true
     },
     "lastName": {
       "description": "Last name of the user",
       "type": "string",
-      "default": "User"
+      "default": "User",
+      "isSearchable": true
     },
     "isEnabled": {
       "description": "Whether the user is able to access the system",
