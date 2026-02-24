@@ -9,7 +9,7 @@
   "repository": "github:adapt-security/adapt-authoring-users",
   "peerDependencies": {
     "adapt-authoring-core": "^1.7.0",
-    "adapt-authoring-mongodb": "^1.1.3",
+    "adapt-authoring-mongodb": "^3.0.0",
     "adapt-authoring-server": "^1.2.1"
   },
   "devDependencies": {
