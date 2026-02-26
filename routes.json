@@ -1,0 +1,33 @@
+{
+  "root": "users",
+  "useDefaultRoutes": false,
+  "routes": [
+    {
+      "route": "/me",
+      "handlers": { "get": "default", "put": "default", "patch": "default" },
+      "permissions": { "get": ["read:me"], "put": ["write:me"], "patch": ["write:me"] }
+    },
+    {
+      "route": "/",
+      "handlers": { "get": "default" },
+      "permissions": { "get": ["read:{scope}"] }
+    },
+    {
+      "route": "/schema",
+      "handlers": { "get": "serveSchema" },
+      "permissions": { "get": ["read:schema"] }
+    },
+    {
+      "route": "/:_id",
+      "handlers": { "put": "default", "get": "default", "patch": "default", "delete": "default" },
+      "permissions": { "put": ["write:{scope}"], "get": ["read:{scope}"], "patch": ["write:{scope}"], "delete": ["write:{scope}"] }
+    },
+    {
+      "route": "/query",
+      "validate": false,
+      "modifying": false,
+      "handlers": { "post": "query" },
+      "permissions": { "post": ["read:{scope}"] }
+    }
+  ]
+}
