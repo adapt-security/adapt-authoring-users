@@ -7,6 +7,9 @@
   "type": "module",
   "main": "index.js",
   "repository": "github:adapt-security/adapt-authoring-users",
+  "dependencies": {
+    "adapt-authoring-api": "^3.0.0"
+  },
   "peerDependencies": {
     "adapt-authoring-core": "^2.0.0",
     "adapt-authoring-mongodb": "^3.0.0",
