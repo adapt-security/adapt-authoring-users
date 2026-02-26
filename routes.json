@@ -1,0 +1,39 @@
+{
+  "_comment": "Routes are defined explicitly rather than using defaults to omit POST / and add /me",
+  "root": "users",
+  "routes": [
+    {
+      "route": "/me",
+      "modifiers": ["put", "patch"],
+      "handlers": { "get": "requestHandler", "put": "requestHandler", "patch": "requestHandler" },
+      "permissions": { "get": ["read:me"], "put": ["write:me"], "patch": ["write:me"] },
+      "meta": {
+        "get": { "summary": "Retrieve your own user data" },
+        "put": { "summary": "Replace your own user data" },
+        "patch": { "summary": "Update your own user data" }
+      }
+    },
+    {
+      "route": "/",
+      "handlers": { "get": "queryHandler" },
+      "permissions": { "get": ["read:${scope}"] }
+    },
+    {
+      "route": "/schema",
+      "handlers": { "get": "serveSchema" },
+      "permissions": { "get": ["read:schema"] }
+    },
+    {
+      "route": "/:_id",
+      "handlers": { "put": "requestHandler", "get": "requestHandler", "patch": "requestHandler", "delete": "requestHandler" },
+      "permissions": { "put": ["write:${scope}"], "get": ["read:${scope}"], "patch": ["write:${scope}"], "delete": ["write:${scope}"] }
+    },
+    {
+      "route": "/query",
+      "validate": false,
+      "modifying": false,
+      "handlers": { "post": "queryHandler" },
+      "permissions": { "post": ["read:${scope}"] }
+    }
+  ]
+}
