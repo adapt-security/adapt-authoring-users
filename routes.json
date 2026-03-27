@@ -1,5 +1,6 @@
 {
   "_comment": "Routes are defined explicitly rather than using defaults to omit POST / and add /me",
+  "useDefaultRoutes": false,
   "root": "users",
   "routes": [
     {
