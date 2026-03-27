@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$anchor": "usergroup",
+  "description": "A group of system users",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "description": "Display name of the user group",
+      "type": "string"
+    }
+  },
+  "required": ["displayName"]
+}
