@@ -2,62 +2,35 @@ import { describe, it, mock, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 
 describe('UsersModule usergroups', () => {
-  describe('#usergroupsProcessRequest()', () => {
-    function usergroupsProcessRequest (req, res, next) {
-      const config = req.routeConfig || {}
-      const modifiers = config.modifiers ?? ['post', 'put', 'patch', 'delete']
-      const modifying = config.modifying ?? modifiers.includes(req.method.toLowerCase())
-      req.apiData = {
-        collectionName: 'usergroups',
-        config,
-        data: { ...req.body },
-        modifying,
-        query: { ...req.query, ...req.params },
-        schemaName: 'usergroup'
-      }
-      next()
+  describe('#processRequestMiddleware() schema routing', () => {
+    function processRequestMiddleware (req, superCallback) {
+      // Simulates the override: use per-route schemaName if set, otherwise userSchemaName
+      req.apiData = { schemaName: 'user' } // super sets this
+      superCallback()
     }
 
-    it('should set collectionName to usergroups', () => {
-      const req = { method: 'GET', body: {}, query: {}, params: {}, routeConfig: { route: '/' } }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
-      assert.equal(req.apiData.collectionName, 'usergroups')
-    })
+    function override (req) {
+      req.apiData.schemaName = req.routeConfig.schemaName || req.auth.userSchemaName
+    }
 
-    it('should set schemaName to usergroup', () => {
-      const req = { method: 'GET', body: {}, query: {}, params: {}, routeConfig: { route: '/' } }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
+    it('should use per-route schemaName for usergroup routes', () => {
+      const req = {
+        routeConfig: { schemaName: 'usergroup' },
+        auth: { userSchemaName: 'superuser' },
+        apiData: {}
+      }
+      processRequestMiddleware(req, () => override(req))
       assert.equal(req.apiData.schemaName, 'usergroup')
     })
 
-    it('should merge query and params', () => {
-      const req = { method: 'GET', body: {}, query: { search: 'test' }, params: { _id: '123' }, routeConfig: {} }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
-      assert.deepEqual(req.apiData.query, { search: 'test', _id: '123' })
-    })
-
-    it('should set modifying true for POST', () => {
-      const req = { method: 'POST', body: { displayName: 'Group' }, query: {}, params: {}, routeConfig: {} }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
-      assert.equal(req.apiData.modifying, true)
-    })
-
-    it('should set modifying false for GET', () => {
-      const req = { method: 'GET', body: {}, query: {}, params: {}, routeConfig: {} }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
-      assert.equal(req.apiData.modifying, false)
-    })
-
-    it('should call next', () => {
-      const req = { method: 'GET', body: {}, query: {}, params: {}, routeConfig: {} }
-      const next = mock.fn()
-      usergroupsProcessRequest(req, {}, next)
-      assert.equal(next.mock.callCount(), 1)
+    it('should fall back to auth userSchemaName for user routes', () => {
+      const req = {
+        routeConfig: {},
+        auth: { userSchemaName: 'superuser' },
+        apiData: {}
+      }
+      processRequestMiddleware(req, () => override(req))
+      assert.equal(req.apiData.schemaName, 'superuser')
     })
   })
 
