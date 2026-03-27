@@ -34,6 +34,36 @@
       "modifying": false,
       "handlers": { "post": "queryHandler" },
       "permissions": { "post": ["read:${scope}"] }
+    },
+    {
+      "route": "/groups",
+      "collectionName": "usergroups",
+      "schemaName": "usergroup",
+      "handlers": { "get": "queryHandler", "post": "requestHandler" },
+      "permissions": { "get": ["read:usergroups"], "post": ["write:usergroups"] }
+    },
+    {
+      "route": "/groups/schema",
+      "collectionName": "usergroups",
+      "schemaName": "usergroup",
+      "handlers": { "get": "serveSchema" },
+      "permissions": { "get": ["read:schema"] }
+    },
+    {
+      "route": "/groups/:_id",
+      "collectionName": "usergroups",
+      "schemaName": "usergroup",
+      "handlers": { "get": "requestHandler", "put": "requestHandler", "patch": "requestHandler", "delete": "requestHandler" },
+      "permissions": { "get": ["read:usergroups"], "put": ["write:usergroups"], "patch": ["write:usergroups"], "delete": ["write:usergroups"] }
+    },
+    {
+      "route": "/groups/query",
+      "collectionName": "usergroups",
+      "schemaName": "usergroup",
+      "validate": false,
+      "modifying": false,
+      "handlers": { "post": "queryHandler" },
+      "permissions": { "post": ["read:usergroups"] }
     }
   ]
 }
