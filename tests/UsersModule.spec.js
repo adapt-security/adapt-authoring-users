@@ -1,5 +1,6 @@
 import { describe, it, mock } from 'node:test'
 import assert from 'node:assert/strict'
+import UsersModule from '../lib/UsersModule.js'
 
 /**
  * UsersModule extends AbstractApiModule and requires a running app.
@@ -137,6 +138,78 @@ describe('UsersModule', () => {
       }
       updateAccess({}, {}, next)
       assert.equal(next.mock.calls.length, 1)
+    })
+  })
+
+  describe('#registerUserModule()', () => {
+    function fakeInstance (extendSchema) {
+      const inst = Object.create(UsersModule.prototype)
+      inst.log = mock.fn()
+      inst.app = { waitForModule: mock.fn(async () => ({ extendSchema })) }
+      return inst
+    }
+
+    function fakeMod () {
+      const checkTaps = []
+      const queryTaps = []
+      return {
+        checkTaps,
+        queryTaps,
+        name: 'content',
+        schemaName: 'content',
+        accessCheckHook: { tap: fn => checkTaps.push(fn) },
+        accessQueryHook: { tap: fn => queryTaps.push(fn) }
+      }
+    }
+
+    it('should warn and not register a module with no schemaName', async () => {
+      const inst = fakeInstance()
+      await inst.registerUserModule({ accessCheckHook: {}, accessQueryHook: {} })
+      assert.equal(inst.log.mock.calls.length, 1)
+      assert.equal(inst.log.mock.calls[0].arguments[0], 'warn')
+      assert.equal(inst.app.waitForModule.mock.calls.length, 0)
+    })
+
+    it('should extend the schema and tap both access hooks', async () => {
+      const extendSchema = mock.fn()
+      const inst = fakeInstance(extendSchema)
+      const mod = fakeMod()
+      await inst.registerUserModule(mod)
+      assert.deepEqual(extendSchema.mock.calls[0].arguments, ['content', 'users'])
+      assert.equal(mod.checkTaps.length, 1)
+      assert.equal(mod.queryTaps.length, 1)
+      assert.equal(mod.checkTaps[0], UsersModule.prototype.checkUserAccess)
+      assert.equal(mod.queryTaps[0], UsersModule.prototype.grantUserAccess)
+    })
+  })
+
+  describe('#checkUserAccess()', () => {
+    const check = UsersModule.prototype.checkUserAccess
+    it('should grant a listed user', () => {
+      assert.equal(check({ auth: { user: { _id: 'u1' } } }, { _access: { users: ['u1'] } }), true)
+    })
+    it('should not grant an unlisted user', () => {
+      assert.equal(check({ auth: { user: { _id: 'u2' } } }, { _access: { users: ['u1'] } }), false)
+    })
+    it('should not grant when there is no auth user', () => {
+      assert.equal(check({ auth: {} }, { _access: { users: ['u1'] } }), false)
+    })
+    it('should not grant when the resource lists no users', () => {
+      assert.equal(check({ auth: { user: { _id: 'u1' } } }, {}), false)
+    })
+  })
+
+  describe('#grantUserAccess()', () => {
+    const grant = UsersModule.prototype.grantUserAccess
+    it('should widen the query with the requesting user id', () => {
+      const query = {}
+      grant({ auth: { user: { _id: 'u1' } }, apiData: { query } })
+      assert.deepEqual(query.$or, [{ '_access.users': 'u1' }])
+    })
+    it('should be a no-op when there is no authenticated user', () => {
+      const query = {}
+      grant({ auth: {}, apiData: { query } })
+      assert.deepEqual(query, {})
     })
   })
 })
