@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$anchor": "users",
+  "description": "Adds a users grant key to the generic _access object, sharing a resource with specific users",
+  "$merge": {
+    "with": {
+      "properties": {
+        "_access": {
+          "type": "object",
+          "properties": {
+            "users": {
+              "description": "Ids of the users the resource is shared with",
+              "type": "array",
+              "default": [],
+              "items": {
+                "type": "string",
+                "isObjectId": true
+              },
+              "_adapt": {
+                "inputType": "Principal",
+                "options": {
+                  "apiRoot": "users",
+                  "labelField": "email",
+                  "kind": "user"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
