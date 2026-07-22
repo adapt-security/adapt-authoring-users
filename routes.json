@@ -30,6 +30,19 @@
       "permissions": { "put": ["write:${scope}"], "get": ["read:${scope}"], "patch": ["write:${scope}"], "delete": ["write:${scope}"] }
     },
     {
+      "route": "/:_id/ownedcontent",
+      "validate": false,
+      "modifying": false,
+      "handlers": { "get": "ownedContentHandler" },
+      "permissions": { "get": ["read:${scope}"] },
+      "meta": {
+        "get": {
+          "summary": "List the courses and assets owned by this user",
+          "description": "Returns the courses and assets whose createdBy is this user, for previewing a content-ownership transfer."
+        }
+      }
+    },
+    {
       "route": "/:_id/transfercontent",
       "validate": false,
       "modifying": false,
