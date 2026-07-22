@@ -30,6 +30,19 @@
       "permissions": { "put": ["write:${scope}"], "get": ["read:${scope}"], "patch": ["write:${scope}"], "delete": ["write:${scope}"] }
     },
     {
+      "route": "/:_id/transfercontent",
+      "validate": false,
+      "modifying": false,
+      "handlers": { "post": "transferContentHandler" },
+      "permissions": { "post": ["write:${scope}"] },
+      "meta": {
+        "post": {
+          "summary": "Transfer content ownership to another user",
+          "description": "Reassigns all content and assets owned by this user (createdBy) to the user passed as _toUser in the request body. Use before deleting a user who owns content."
+        }
+      }
+    },
+    {
       "route": "/query",
       "validate": false,
       "modifying": false,
