@@ -12,5 +12,12 @@
     },
     "description": "You cannot delete your own user account",
     "statusCode": 400
+  },
+  "INVALID_TRANSFER_TARGET": {
+    "data": {
+      "_toUser": "_id of the intended new owner"
+    },
+    "description": "A valid _toUser (an existing user, different from the current owner) must be supplied to transfer content",
+    "statusCode": 400
   }
 }
